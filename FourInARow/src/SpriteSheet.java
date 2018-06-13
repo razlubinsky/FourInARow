@@ -14,3 +14,4 @@ public class SpriteSheet
 		return sheet.getSubimage(id[0]*width, id[1]*height, width, height);
 	}
 }
+ 

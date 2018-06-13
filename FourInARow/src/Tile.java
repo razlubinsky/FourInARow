@@ -19,7 +19,7 @@ public class Tile extends JComponent
 	public static BufferedImage tile_player1;
 	public static BufferedImage tile_player2;
 	
-	
+
 	public Tile()
 	{
 		try 

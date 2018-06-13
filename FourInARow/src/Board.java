@@ -20,7 +20,7 @@ public class Board  extends Applet implements Runnable, MouseListener
 	private Image screen;
 
 	public Block[][] block = new Block[ind_x][ind_y];
-	
+	 
 	public Board()
 	{
 		setPreferredSize(size);

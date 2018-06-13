@@ -13,7 +13,7 @@ public class Block extends JComponent
 		setBounds(size);
 		this.id = id;
 	}
-	
+
 	public void render(Graphics g,int x,int y, int[] id)
 	{
 		if(id == Tile.blank)
