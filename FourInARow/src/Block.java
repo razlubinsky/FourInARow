@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import javax.swing.JComponent;
 
+
 public class Block extends JComponent
 {
 	private static final long serialVersionUID = 1L;
