@@ -11,15 +11,11 @@ public class Board  extends Applet implements Runnable, MouseListener
 {
 	private int ind_x = 7, ind_y = 6;
 	private static final long serialVersionUID = 1L;
-	
-	public boolean isFirst = true;
-	public static Dimension size = new Dimension(1130,970);
-	
-	public static String name = "Four In a Row";
-	
+	private boolean isFirst = true;
+	private static Dimension size = new Dimension(1130,970);
+	private static String name = "Four In a Row";
 	private Image screen;
-
-	public Block[][] block = new Block[ind_x][ind_y];
+	private Block[][] block = new Block[ind_x][ind_y];
 	 
 	public Board()
 	{
@@ -39,7 +35,7 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for(int y=0;y<ind_y;y++)
 			{
-				block[x][y] = new Block(new Rectangle(x * Tile.tileSize, y * Tile.tileSize, Tile.tileSize, Tile.tileSize), Tile.blank);
+				block[x][y] = new Block(new Rectangle(x * Tile.getTileSize(), y * Tile.getTileSize(), Tile.getTileSize(), Tile.getTileSize()), Tile.getId(0));
 			}
 		}
 		generateLevel();
@@ -56,12 +52,12 @@ public class Board  extends Applet implements Runnable, MouseListener
 			{
 				for (int y=0 ; y< ind_y; y++)
 				{
-					if (block[x][y].id == Tile.player1)
-						block[x][y].id = Tile.player2;
-					else if (block[x][y].id == Tile.player2)
-						block[x][y].id = Tile.blank;
-					else if (block[x][y].id == Tile.blank)
-						block[x][y].id = Tile.player1;
+					if (block[x][y].getId() == Tile.getId(1))
+						block[x][y].setId(Tile.getId(2));
+					else if (block[x][y].getId() == Tile.getId(2))
+						block[x][y].setId(Tile.getId(0));
+					else if (block[x][y].getId() == Tile.getId(0))
+						block[x][y].setId(Tile.getId(1));
 				}
 			}
 			this.render();
@@ -78,7 +74,7 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 				for (int i = 1; i< 4; i++)
 				{
-					if (block[x-i][y+i].id == block[x][y].id)
+					if (block[x-i][y+i].getId() == block[x][y].getId())
 						counter++;
 				}
 				if (counter == 3)
@@ -90,10 +86,10 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for (int i = 1; i< 3; i++)
 			{
-				if (block[x-i][y+i].id == block[x][y].id)
+				if (block[x-i][y+i].getId() == block[x][y].getId())
 					counter++;
 			}
-			if (block[x+1][y-1].id == block[x][y].id)
+			if (block[x+1][y-1].getId() == block[x][y].getId())
 				counter++;			
 			if (counter == 3)
 				return true;
@@ -103,10 +99,10 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for (int i = 1; i< 3; i++)
 			{
-				if (block[x+i][y-i].id == block[x][y].id)
+				if (block[x+i][y-i].getId() == block[x][y].getId())
 					counter++;
 			}
-			if (block[x-1][y+1].id == block[x][y].id)
+			if (block[x-1][y+1].getId() == block[x][y].getId())
 				counter++;			
 			if (counter == 3)
 				return true;
@@ -116,7 +112,7 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for (int i = 1; i< 4; i++)
 			{
-				if (block[x+i][y-i].id == block[x][y].id)
+				if (block[x+i][y-i].getId() == block[x][y].getId())
 					counter++;
 			}
 			if (counter == 3)
@@ -136,7 +132,7 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 				for (int i = 1; i< 4; i++)
 				{
-					if (block[x-i][y-i].id == block[x][y].id)
+					if (block[x-i][y-i].getId() == block[x][y].getId())
 						counter++;
 				}
 				if (counter == 3)
@@ -147,10 +143,10 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for (int i = 1; i< 3; i++)
 			{
-				if (block[x-i][y-i].id == block[x][y].id)
+				if (block[x-i][y-i].getId() == block[x][y].getId())
 					counter++;
 			}
-			if (block[x+1][y+1].id == block[x][y].id)
+			if (block[x+1][y+1].getId() == block[x][y].getId())
 				counter++;			
 			if (counter == 3)
 				return true;
@@ -160,10 +156,10 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for (int i = 1; i< 3; i++)
 			{
-				if (block[x+i][y+i].id == block[x][y].id)
+				if (block[x+i][y+i].getId() == block[x][y].getId())
 					counter++;
 			}
-			if (block[x-1][y-1].id == block[x][y].id)
+			if (block[x-1][y-1].getId() == block[x][y].getId())
 				counter++;			
 			if (counter == 3)
 				return true;
@@ -173,7 +169,7 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for (int i = 1; i< 4; i++)
 			{
-				if (block[x+i][y+i].id == block[x][y].id)
+				if (block[x+i][y+i].getId() == block[x][y].getId())
 					counter++;
 			}
 			if (counter == 3)
@@ -191,12 +187,12 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for (int y = 0; y < ind_y; y++)
 			{
-				if (block[x][y].id == Tile.player1)
+				if (block[x][y].getId() == Tile.getId(1))
 				{
 					if (checkFirstAngle(x, y) || checkSecondAngle(x, y))
 						return 1;
 				}
-				else if (block[x][y].id == Tile.player2)
+				else if (block[x][y].getId() == Tile.getId(2))
 				{
 					if (checkFirstAngle(x, y) || checkSecondAngle(x, y))
 						return 2;
@@ -213,14 +209,14 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for (int x = 0; x < ind_x; x++)
 			{
-				if (block[x][y].id == Tile.player1)
+				if (block[x][y].getId() == Tile.getId(1))
 				{
 					counter1++;
 					if (counter1 == 4)
 						return 1;
 					counter2 = 0;
 				}
-				else if (block[x][y].id == Tile.player2)
+				else if (block[x][y].getId() == Tile.getId(2))
 				{
 					counter2++;
 					if (counter2 == 4)
@@ -248,14 +244,14 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for (int y = 0; y < ind_y; y++)
 			{
-				if (block[x][y].id == Tile.player1)
+				if (block[x][y].getId() == Tile.getId(1))
 				{
 					counter1++;
 					if (counter1 == 4)
 						return 1;
 					counter2 = 0;
 				}
-				else if (block[x][y].id == Tile.player2)
+				else if (block[x][y].getId() == Tile.getId(2))
 				{
 					counter2++;
 					if (counter2 == 4)
@@ -293,14 +289,14 @@ public class Board  extends Applet implements Runnable, MouseListener
 	public void addCircle(int x, Graphics g)
 	{
 		int y = ind_y-1;
-		while (y >= 0 && block[x][y].id != Tile.blank)
+		while (y >= 0 && block[x][y].getId() != Tile.getId(0))
 			y--;
 		if (y >= 0)
 		{
 			if (isFirst)
-				block[x][y].id = Tile.player1;
+				block[x][y].setId(Tile.getId(1));
 			else 
-				block[x][y].id = Tile.player2;
+				block[x][y].setId(Tile.getId(2));
 			this.render();
 		}
 	}
@@ -313,7 +309,7 @@ public class Board  extends Applet implements Runnable, MouseListener
 			for(int y=0;y<block[0].length;y++)
 			{
 				{
-					block[x][y].id = Tile.blank;
+					block[x][y].setId(Tile.getId(0));
 				}
 			}
 		}
@@ -327,7 +323,7 @@ public class Board  extends Applet implements Runnable, MouseListener
 		{
 			for(int y=0;y<block[0].length;y++)
 			{
-				block[x][y].render(g,x,y,block[x][y].id); 
+				block[x][y].render(g,x,y,block[x][y].getId()); 
 			}
 		}
 	}

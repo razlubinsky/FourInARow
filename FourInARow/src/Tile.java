@@ -8,17 +8,9 @@ public class Tile extends JComponent
 {
 
 	private static final long serialVersionUID = 1L;
-
-	public static int tileSize = 80;
-	
-	public static int[] blank = {0,0};
-	public static int[] player1 = {1,0};
-	public static int[] player2 = {4,0};
-	
-	public static BufferedImage tile_blank;
-	public static BufferedImage tile_player1;
-	public static BufferedImage tile_player2;
-	
+	private static int tileSize = 80;
+	private static int[] id = {0,1,2};
+	private static BufferedImage[] type = new BufferedImage[3];
 
 	public Tile()
 	{
@@ -26,14 +18,30 @@ public class Tile extends JComponent
 		{
 			SpriteSheet sheet = new SpriteSheet(ImageIO.read(new File("res/tile_set.png")));
 			
-			Tile.tile_blank = sheet.crop(blank,tileSize,tileSize);
-			Tile.tile_player1 = sheet.crop(player1,tileSize,tileSize);
-			Tile.tile_player2 = sheet.crop(player2,tileSize,tileSize);			
+			for (int i = 0; i<3 ; i++)
+				Tile.type[i] = sheet.crop(id[i],tileSize,tileSize);
 		}
 		catch(Exception e)
 		{
 			
 		}
+	}
+	public static BufferedImage getType(int index)
+	{
+		return type[index];
+	}
+	
+	public static int getTileSize()
+	{
+		return tileSize;
+	}
+	public static void setId(int index, int value)
+	{
+		id[index] = value;
+	}
+	public static int getId(int index)
+	{
+		return id[index];
 	}
 
 
