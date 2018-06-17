@@ -26,7 +26,7 @@ public class Block extends JComponent
 	{
 			g.drawImage(Tile.getType(id),x*Tile.getTileSize(),y*Tile.getTileSize() ,null);
 	}
-	x;
+	x;;
 }
 
 
